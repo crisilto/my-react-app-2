@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .square {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            border: 1px solid black;
+        }
+
+        #container {
+            display: grid;
+            grid-template-columns: repeat(3, 50px);
+        }
+    </style>
+</head>
+
+<body>
+    <!--/**
+ * Create a 3x3 set of 9 squares in a square formation. 
+ * All of these squares should be blue. 
+ * Clicking on any individual square should change the color of that individual square to red. 
+ * Double click on any of the squares should change all of them to blue.
+ */
+-->
+    <div id="container"></div>
+    <script>
+        function createSquare(container) {
+            const square = document.createElement("div");
+            square.className = "square";
+            square.style.backgroundColor = "blue";
+
+            square.onclick = function () {
+                square.style.backgroundColor = square.style.backgroundColor === "blue" ? "red" : "blue";
+            };
+
+            square.ondblclick = function (e) {
+                e.stopPropagation();
+                const squares = document.querySelectorAll('.square');
+                squares.forEach(sq => sq.style.backgroundColor = "blue");
+            };
+
+            container.appendChild(square);
+        }
+
+        const container = document.getElementById("container");
+        for (let i = 0; i < 9; i++) {
+            createSquare(container);
+        }
+    </script>
+</body>
+
+</html>
